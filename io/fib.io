@@ -10,6 +10,6 @@ fib_loop := method(n,
       iminus2 = iminus
       iminus = sum)))
 
-fib := method(n, fib_loop(n))
+fib := Object getSlot("fib_loop")
 
 list(1, 2, 3, 4, 5, 6, 7, 8) map(i, fib(i)) join(" ") println
