@@ -22,9 +22,31 @@ TwoDim transpose := method(
       newDim set(y, x, get(x, y))))
   newDim)
 
+TwoDim toFile := method(fileName,
+  handle := File openForUpdating(fileName) rewind
+  foreach(i,
+    handle write(i join(" ") .. "\n"))
+  handle close)
+
+TwoDim fromFile := method(fileName,
+  ret := self clone
+  handle := File openForReading(fileName)
+  handle foreachLine(line,
+    ret append(line split map(e, if(e == "nil", nil, e))))
+  handle close
+  ret)
+
+"Creating TwoDim" println
 td := TwoDim clone
 td dim(3, 4)
 td set(2, 2, "Batman")
 td println
+"Getting data from TwoDim" println
 td get(2, 2) println
+"Transposing TwoDim twice" println
 td transpose transpose println
+"Saving TwoDim to file (matrix.txt)" println
+td toFile("matrix.txt")
+"Reading TwoDim from file (matrix.txt)" println
+td2 := TwoDim fromFile("matrix.txt")
+td2 println
