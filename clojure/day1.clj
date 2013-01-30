@@ -9,9 +9,11 @@
     (contains? super tpe)))
 
 (defn collection-type [col]
-  (if (subinstance? col clojure.lang.IPersistentList) :list
-    (if (subinstance? col clojure.lang.IPersistentMap) :map
-      (if (subinstance? col clojure.lang.IPersistentVector) :vector nil))))
+  (cond
+    (subinstance? col clojure.lang.IPersistentList) :list
+    (subinstance? col clojure.lang.IPersistentMap) :map
+    (subinstance? col clojure.lang.IPersistentVector) :vector
+    :else nil))
 
 (println (collection-type '()))
 (println (collection-type {}))
