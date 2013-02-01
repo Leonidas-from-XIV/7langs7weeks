@@ -26,7 +26,7 @@
 ; barber <serviced>
 (def barber (agent 0))
 ; seats <free>
-(def free-seats (agent 3))
+(def free-seats (atom 3))
 
 (defn any-seat-occupied? []
   (< @free-seats 3))
@@ -40,7 +40,7 @@
 (defn cut-hair [serviced]
   (if (any-seat-occupied?)
     (do
-      (send free-seats free-seat)
+      (swap! free-seats free-seat)
       (Thread/sleep 20)
       (inc serviced))
     serviced))
@@ -61,7 +61,7 @@
     (if @continue-running
       (let [time (+ 10 (rand-int 20))]
         (Thread/sleep time)
-        (send free-seats try-occupy)
+        (swap! free-seats try-occupy)
         (recur)))))
 
 (future (move-to-chair))
