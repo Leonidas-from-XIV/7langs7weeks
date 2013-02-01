@@ -64,8 +64,8 @@
         (send free-seats try-occupy)
         (recur)))))
 
-(.start (Thread. move-to-chair))
-(.start (Thread. client-arrive))
+(future (move-to-chair))
+(future (client-arrive))
 (Thread/sleep (* 10 1000))
 (println @barber)
 (reset! continue-running false)
