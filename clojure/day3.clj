@@ -51,6 +51,8 @@
   (loop []
     (if @continue-running
       (do
+        ; prevent this thread from gobbling up all processing power
+        (Thread/sleep 1)
         (send barber cut-hair)
         (recur)))))
 
