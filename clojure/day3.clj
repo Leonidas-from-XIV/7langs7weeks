@@ -12,9 +12,9 @@
     existing))
 
 (defn credit [accounts name amount]
-  ; I suppose this can be changed into 'alter' somehow
-  (ref-set accounts 
-           (map #(adjust-if-name % {:name name, :balance amount}) @accounts)))
+  (alter accounts (fn [acc new]
+                    (map #(adjust-if-name % new) acc))
+         {:name name :balance amount}))
 
 (defn debit [accounts name amount]
   (credit accounts name (- amount)))
