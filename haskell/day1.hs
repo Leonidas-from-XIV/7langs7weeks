@@ -24,20 +24,20 @@ module Main where
     -- georgia: tennessee, alabama, florida
     -- florida: alabama, georgia
     -- states: tennessee, missisippi, alabama, georgia, florida
-    valid (t1, t2, _, _, _) | t1 == t2 = False
-    valid (t1, _, t2, _, _) | t1 == t2 = False
-    valid (t1, _, _, t2, _) | t1 == t2 = False
-    valid (m1, m2, _, _, _) | m1 == m2 = False
-    valid (_, m1, m2, _, _) | m1 == m2 = False
-    valid (a1, _, a2, _, _) | a1 == a2 = False
-    valid (_, a1, a2, _, _) | a1 == a2 = False
-    valid (_, _, a1, a2, _) | a1 == a2 = False
-    valid (_, _, a1, _, a2) | a1 == a2 = False
-    valid (g1, _, _, g2, _) | g1 == g2 = False
-    valid (_, _, g1, g2, _) | g1 == g2 = False
-    valid (_, _, _, g1, g2) | g1 == g2 = False
-    valid (_, _, f1, _, f2) | f1 == f2 = False
-    valid (_, _, _, f1, f2) | f1 == f2 = False
+    valid (t, m, _, _, _) | t == m = False
+    valid (t, _, a, _, _) | t == a = False
+    valid (t, _, _, g, _) | t == g = False
+    valid (t, m, _, _, _) | t == m = False
+    valid (_, m, a, _, _) | m == a = False
+    valid (t, _, a, _, _) | t == a = False
+    valid (_, m, a, _, _) | m == a = False
+    valid (_, _, a, g, _) | a == g = False
+    valid (_, _, a, _, f) | a == f = False
+    valid (t, _, _, g, _) | t == g = False
+    valid (_, _, a, g, _) | a == g = False
+    valid (_, _, _, g, f) | g == f = False
+    valid (_, _, a, _, f) | a == f = False
+    valid (_, _, _, g, f) | g == f = False
     valid _ = True
     -- yes, I know that some of these are reduntant, but I think that should be
     -- fine, considering it is a mapping state -> contacts
