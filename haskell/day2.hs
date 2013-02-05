@@ -31,3 +31,7 @@ module Main where
     contains element = any (\x -> x == element)
     filterStuff = filter (\c -> contains c "0123456789.")
     getNumber st = read (filterStuff st) :: Double
+
+    everyThird x = [x, (x+3)..]
+    everyFifth y = [y, (y+5)..]
+    everyEight x y = zipWith (+) (everyThird x) (everyFifth y)
