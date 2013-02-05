@@ -28,6 +28,6 @@ module Main where
                       (a, b) = splitAt (l `div` 2) xs
                   in fnmerge f (fnsort f a) (fnsort f b)
 
-    contains element lst = any (\x -> x == element) lst
-    filterStuff st = filter (\c -> contains c "0123456789.") st
+    contains element = any (\x -> x == element)
+    filterStuff = filter (\c -> contains c "0123456789.")
     getNumber st = read (filterStuff st) :: Double
