@@ -27,3 +27,7 @@ module Main where
     fnsort f xs = let l = length xs
                       (a, b) = splitAt (l `div` 2) xs
                   in fnmerge f (fnsort f a) (fnsort f b)
+
+    contains element lst = any (\x -> x == element) lst
+    filterStuff st = filter (\c -> contains c "0123456789.") st
+    getNumber st = read (filterStuff st) :: Double
