@@ -35,3 +35,8 @@ module Main where
     everyThird x = [x, (x+3)..]
     everyFifth y = [y, (y+5)..]
     everyEight x y = zipWith (+) (everyThird x) (everyFifth y)
+
+    -- I know this is awkward, but that's what the book wants me to do
+    -- CAN'T RESIST!!!
+    halfDiv = (\a b -> b / a) 2
+    addNewline = (\ending str -> str ++ ending) "\n"
