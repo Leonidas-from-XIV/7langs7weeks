@@ -16,9 +16,7 @@ module Main where
     mazeNode :: (Int,Int) -> Node
     mazeNode = nodeFromMaze myMaze
 
-    startNode = mazeNode (0,0)
     targetNode = mazeNode (2,2)
-    startPath = [[startNode]]
     checkIfEnd n = endNode == n
 
     -- takes the last node and creates new paths with all possible exit nodes
@@ -35,4 +33,8 @@ module Main where
                         found = complete /= []
                         in if found then (head complete) else exploreMaze (p >>= extendPath)
 
-    solution = exploreMaze startPath
+    -- sole wrapper function for this mess
+    solve startNode = exploreMaze [[startNode]]
+    solution = solve $ mazeNode (0,0)
+    -- so yeah, this works. Kinda. If I were do do it again, I'd do something
+    -- different, e.g. recursion instead of bind operator
