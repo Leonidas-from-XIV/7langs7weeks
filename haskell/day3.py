@@ -1,35 +1,30 @@
 from functools import partial
 
 class Maybe():
-    def __init__(self, tpe):
-        self.tpe = tpe
+    pass
 
-    def bind(self, f):
-        if isinstance(self.tpe, Nothing):
-            return self
-        else:
-            return f(self.tpe.value)
-
-    def __repr__(self):
-        return repr(self.tpe)
-
-
-class Just():
+class Just(Maybe):
     def __init__(self, value):
         self.value = value
 
+    def bind(self, f):
+        return f(self.value)
+
     @staticmethod
     def return_(value):
-        return Maybe(Just(value))
+        return Just(value)
 
     def __repr__(self):
         return "Just %s" % self.value
 
 
-class Nothing():
+class Nothing(Maybe):
     @staticmethod
     def return_():
-        return Maybe(Nothing())
+        return Nothing()
+
+    def bind(self, f):
+        return Nothing()
 
     def __repr__(self):
         return "Nothing"
