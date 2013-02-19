@@ -38,5 +38,5 @@ module Main where
 
     -- I know this is awkward, but that's what the book wants me to do
     -- CAN'T RESIST!!!
-    halfDiv = (\a b -> b / a) 2
-    addNewline = (\ending str -> str ++ ending) "\n"
+    halfDiv = flip (/) 2
+    addNewline = flip (++) "\n"
